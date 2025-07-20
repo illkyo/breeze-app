@@ -6,7 +6,4 @@
   <p>
     This job pays {{ $job['salary'] }} rf per month.
   </p>
-  <p>
-    {{ $id }}
-  </p>
 </x-layout>

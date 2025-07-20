@@ -3,6 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Job;
+use App\Models\Ferry;
+use App\Models\Room;
 
 Route::get('/', function () {
     return view('home', [
@@ -23,6 +25,24 @@ Route::get('/jobs', function () {
 Route::get('/jobs/{id}', function ($id) {
     $job = Job::find($id);
     return view('job', ['job' => $job, 'id' => $id]);
+});
+
+Route::get('/ferries', function () {
+    return view('ferries', ['ferries' => Ferry::all()]);
+});
+
+Route::get('/ferries/{id}', function ($id) {
+    $ferry = Ferry::find($id);
+    return view('ferry', ['ferry' => $ferry, 'id' => $id]);
+});
+
+Route::get('/rooms', function () {
+    return view('rooms', ['rooms' => Room::all()]);
+});
+
+Route::get('/rooms/{id}', function ($id) {
+    $room = Room::find($id);
+    return view('room', ['room' => $room, 'id' => $id]);
 });
 
 Route::get('/dashboard', function () {
