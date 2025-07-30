@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Models\Job;
 use App\Models\Ferry;
 use App\Models\Room;
+use App\Models\Activity;
+
 
 Route::get('/', function () {
     return view('home', [
@@ -43,6 +45,15 @@ Route::get('/rooms', function () {
 Route::get('/rooms/{id}', function ($id) {
     $room = Room::find($id);
     return view('room', ['room' => $room, 'id' => $id]);
+});
+
+Route::get('/activities', function () {
+    return view('activities', ['activities' => Activity::all()]);
+});
+
+Route::get('/activities/{id}', function ($id) {
+    $activity = Activity::find($id);
+    return view('activity', ['activity' => $activity, 'id' => $id]);
 });
 
 Route::get('/dashboard', function () {
