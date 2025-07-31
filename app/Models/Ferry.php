@@ -9,7 +9,7 @@ use App\Models\FerryTicket;
 class Ferry extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'price'];
+    protected $fillable = ['name', 'price', 'capacity', 'visitors_onboard'];
 
     public function ferryTickets() {
         return $this->hasMany(FerryTicket::class);

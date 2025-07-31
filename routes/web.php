@@ -21,40 +21,108 @@ Route::get('/contact', function () {
 });
 
 Route::get('/jobs', function () {
-    $jobs = Job::with('employer')->simplePaginate(2);
-    return view('jobs', ['jobs' => $jobs]);
+    $jobs = Job::with('employer')->latest()->simplePaginate(2);
+    return view('jobs.index', ['jobs' => $jobs]);
+});
+
+Route::get('/jobs/create', function () {
+    return view('jobs.create');
 });
 
 Route::get('/jobs/{id}', function ($id) {
     $job = Job::find($id);
-    return view('job', ['job' => $job, 'id' => $id]);
+    return view('jobs.show', ['job' => $job, 'id' => $id]);
+});
+
+Route::post('/jobs', function () {
+    // validation 
+
+    Job::create([
+        'title' => request('title'),
+        'salary' => request('salary'),
+        'employer_id' => 1,
+    ]);
+
+    return redirect('/jobs');
 });
 
 Route::get('/ferries', function () {
-    return view('ferries', ['ferries' => Ferry::all()]);
+    return view('ferries.index', ['ferries' => Ferry::all()]);
+});
+
+Route::get('/ferries/create', function () {
+    return view('ferries.create');
 });
 
 Route::get('/ferries/{id}', function ($id) {
     $ferry = Ferry::find($id);
-    return view('ferry', ['ferry' => $ferry, 'id' => $id]);
+    return view('ferries.show', ['ferry' => $ferry, 'id' => $id]);
+});
+
+Route::post('/ferries', function () {
+    // validation
+    
+    // dd(request()->all());
+
+    Ferry::create([
+        'name' => request('name'),
+        'price' => request('price'),
+        'capacity' => request('capacity'),
+        'visitors_onboard' => request('visitors_onboard'),
+    ]);
+
+
+    return redirect('/ferries');
 });
 
 Route::get('/rooms', function () {
-    return view('rooms', ['rooms' => Room::all()]);
+    return view('rooms.index', ['rooms' => Room::all()]);
+});
+
+Route::get('/rooms/create', function () {
+    return view('rooms.create');
 });
 
 Route::get('/rooms/{id}', function ($id) {
     $room = Room::find($id);
-    return view('room', ['room' => $room, 'id' => $id]);
+    return view('rooms.show', ['room' => $room, 'id' => $id]);
+});
+
+Route::post('/rooms', function () {
+    // validation
+
+    Room::create([
+        'number' => request('number'),
+        'floor' => request('floor'),
+        'price' => request('price')
+    ]);
+
+    return redirect('/rooms');
 });
 
 Route::get('/activities', function () {
-    return view('activities', ['activities' => Activity::all()]);
+    return view('activities.index', ['activities' => Activity::all()]);
+});
+
+Route::get('/activities/create', function () {
+    return view('activities.create');
 });
 
 Route::get('/activities/{id}', function ($id) {
     $activity = Activity::find($id);
-    return view('activity', ['activity' => $activity, 'id' => $id]);
+    return view('activities.show', ['activity' => $activity, 'id' => $id]);
+});
+
+Route::post('/activities', function () {
+    // validation
+
+    Activity::create([
+        'name' => request('name'),
+        'price' => request('price'),
+        'type' => request('type')
+    ]);
+
+    return redirect('/activities');
 });
 
 Route::get('/dashboard', function () {
