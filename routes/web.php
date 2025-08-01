@@ -22,20 +22,23 @@ Route::get('/contact', function () {
     return view('contact');
 });
 
+// index
 Route::get('/jobs', function () {
     $jobs = Job::with('employer')->latest()->simplePaginate(2);
     return view('jobs.index', ['jobs' => $jobs]);
 });
 
+// create
 Route::get('/jobs/create', function () {
     return view('jobs.create');
 });
 
-Route::get('/jobs/{id}', function ($id) {
-    $job = Job::find($id);
-    return view('jobs.show', ['job' => $job, 'id' => $id]);
+// show
+Route::get('/jobs/{job}', function (Job $job) {
+    return view('jobs.show', ['job' => $job]);
 });
 
+// store
 Route::post('/jobs', function () {
     request()->validate([
         'title' => ['required', 'min:5'],
@@ -51,8 +54,36 @@ Route::post('/jobs', function () {
     return redirect('/jobs');
 });
 
+// edit
+Route::get('/jobs/{job}/edit', function (Job $job) {
+    return view('jobs.edit', ['job' => $job]);
+});
+
+// update
+Route::patch('/jobs/{job}', function (Job $job) {
+    request()->validate([
+        'title' => ['required', 'min:5'],
+        'salary' => ['required']
+    ]);
+    // authorize (On Hold...)
+    $job->update([
+        'title' => request('title'),
+        'salary' => request('salary')
+    ]);
+
+    return redirect('/jobs/' . $job->id);
+});
+
+// delete
+Route::delete('/jobs/{job}', function (Job $job) {
+    // authorize (On Hold...)
+    $job->delete();
+
+    return redirect('/jobs');
+});
+
 Route::get('/ferries', function () {
-    return view('ferries.index', ['ferries' => Ferry::all()]);
+    return view('ferries.index', ['ferries' => Ferry::latest()->simplePaginate(4)]);
 });
 
 Route::get('/ferries/create', function () {
@@ -81,8 +112,35 @@ Route::post('/ferries', function () {
     return redirect('/ferries');
 });
 
+// Route::get('/ferries/{ferry}/edit', function (Ferry $ferry) {
+//     return view('ferries.edit', ['ferry' => $ferry]);
+// });
+
+// Route::patch('/ferries/{ferry}', function (Ferry $ferry) {
+//     request()->validate([
+//         'title' => ['required', 'min:5'],
+//         'salary' => ['required']
+//     ]);
+//     // authorize (On Hold...)
+//     $ferry->update([
+//         'name' => request('name'),
+//         'price' => request('price'),
+//         'capacity' => request('capacity')
+//     ]);
+
+//     return redirect('/ferries/' . $ferry->id);
+// });
+
+// // delete
+// Route::delete('/ferries/{ferry}', function (Ferry $ferry) {
+//     // authorize (On Hold...)
+//     $ferry->delete();
+
+//     return redirect('/ferries');
+// });
+
 Route::get('/rooms', function () {
-    return view('rooms.index', ['rooms' => Room::all()]);
+    return view('rooms.index', ['rooms' => Room::latest()->simplePaginate(4)]);
 });
 
 Route::get('/rooms/create', function () {
@@ -111,7 +169,7 @@ Route::post('/rooms', function () {
 });
 
 Route::get('/activities', function () {
-    return view('activities.index', ['activities' => Activity::all()]);
+    return view('activities.index', ['activities' => Activity::latest()->simplePaginate(5)]);
 });
 
 Route::get('/activities/create', function () {

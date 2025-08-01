@@ -2,13 +2,14 @@
   <x-slot:heading>
   Ferries
   </x-slot:heading>
-  <ul>
+  <div class="space-y-4">
     @foreach ($ferries as $ferry)
-      <li>
-        <a href="/ferries/{{ $ferry['id'] }}" class="hover:underline">
-          <strong>{{ $ferry['name'] }}</strong> - {{ $ferry['price']}} >>
-        </a>
-      </li>
+      <a href="/ferries/{{ $ferry['id'] }}" class="block px-4 py-6 border border-gray-300 rounded-lg">
+        <strong>{{ $ferry['name'] }}</strong> - {{ $ferry['price']}} >>
+      </a>
     @endforeach
-  </ul>
+  </div>
+  <div class="mt-4">
+    {{ $ferries->links() }}
+  </div>
 </x-layout>

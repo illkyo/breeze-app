@@ -17,7 +17,7 @@ class RoomFactory extends Factory
     public function definition(): array
     {
         return [
-            'code' => fake()->randomDigitNotNull(),
+            'code' => str_pad(fake()->numberBetween(0, 9999), 4, '0', STR_PAD_LEFT),
             'price' => fake()->randomFloat(2, 5, 20),
         ];
     }

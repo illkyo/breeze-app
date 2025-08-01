@@ -20,8 +20,8 @@ class ActivityFactory extends Factory
     {
         return [
             'name' => fake()->city(),
-            'type' => fake()->randomElement(Type::cases()),
             'price' => fake()->randomFloat(2, 5, 20),
+            'type' => fake()->randomElement(Type::cases()),
         ];
     }
 }

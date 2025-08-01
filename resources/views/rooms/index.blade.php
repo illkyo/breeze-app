@@ -2,13 +2,14 @@
   <x-slot:heading>
   Rooms
   </x-slot:heading>
-  <ul>
+  <div class="space-y-4">
     @foreach ($rooms as $room)
-      <li>
-        <a href="/rooms/{{ $room['id'] }}" class="hover:underline">
-          <strong>Room {{ $room['code'] }}</strong> - {{ $room['price']}} >>
-        </a>
-      </li>
+      <a href="/rooms/{{ $room['id'] }}" class="block px-4 py-6 border border-gray-300 rounded-lg">
+        <strong>Room {{ $room['code'] }}</strong> - {{ $room['price']}} >>
+      </a>
     @endforeach
-  </ul>
+  </div>
+  <div class="mt-4">
+    {{ $rooms->links() }}
+  </div>
 </x-layout>

@@ -3,13 +3,14 @@
   Activities
   </x-slot:heading>
   <h2>All Available Activities</h2>
-  <ul>
+  <div class="space-y-4">
     @foreach ($activities as $activity)
-      <li>
-        <a href="/activities/{{ $activity['id'] }}" class="hover:underline">
-          <strong>{{ $activity['name'] }}</strong> - {{ $activity['price']}} >>
-        </a>
-      </li>
+      <a href="/activities/{{ $activity['id'] }}" class="block px-4 py-6 border border-gray-300 rounded-lg">
+        <strong>{{ $activity['name'] }}</strong> - {{ $activity['price']}} >>
+      </a>
     @endforeach
-  </ul>
+    </div>
+  <div class="mt-4">
+    {{ $activities->links() }}
+  </div>
 </x-layout>
