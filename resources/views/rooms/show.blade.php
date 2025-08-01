@@ -1,5 +1,5 @@
 @php
-  $number = substr($room['code'], 0, 2);
+  $number = substr($room['code'], 2);
   $floor = substr($room['code'], -2);
 @endphp
 
