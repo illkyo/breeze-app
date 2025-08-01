@@ -17,8 +17,7 @@ class RoomFactory extends Factory
     public function definition(): array
     {
         return [
-            'number' => fake()->randomDigitNotNull(),
-            'floor' => fake()->randomDigitNotNull(),
+            'code' => fake()->randomDigitNotNull(),
             'price' => fake()->randomFloat(2, 5, 20),
         ];
     }

@@ -6,6 +6,8 @@ use App\Models\Job;
 use App\Models\Ferry;
 use App\Models\Room;
 use App\Models\Activity;
+use App\Enums\Type;
+use Illuminate\Validation\Rule;
 
 
 Route::get('/', function () {
@@ -35,7 +37,10 @@ Route::get('/jobs/{id}', function ($id) {
 });
 
 Route::post('/jobs', function () {
-    // validation 
+    request()->validate([
+        'title' => ['required', 'min:5'],
+        'salary' => ['required']
+    ]);
 
     Job::create([
         'title' => request('title'),
@@ -60,15 +65,16 @@ Route::get('/ferries/{id}', function ($id) {
 });
 
 Route::post('/ferries', function () {
-    // validation
-    
-    // dd(request()->all());
+    request()->validate([
+        'name' => ['required', 'string', 'max:255', 'unique:ferries'],
+        'price' => ['required', 'decimal:0,2', 'min:5', 'max:999'],
+        'capacity' => ['required', 'integer', 'min:8', 'max:9999']
+    ]);
 
     Ferry::create([
         'name' => request('name'),
         'price' => request('price'),
         'capacity' => request('capacity'),
-        'visitors_onboard' => request('visitors_onboard'),
     ]);
 
 
@@ -89,11 +95,15 @@ Route::get('/rooms/{id}', function ($id) {
 });
 
 Route::post('/rooms', function () {
-    // validation
+    request()->validate([
+        'number' => ['required', 'numeric', 'digits:2', 'min:0', 'max:99'],
+        'floor' => ['required', 'numeric', 'digits:2', 'min:0', 'max:99'],
+        'code' => ['required', 'numeric', 'min:0000', 'max:9999', 'unique:rooms'],
+        'price' => ['required', 'decimal:0,2', 'min:0', 'max:9999']
+    ]);
 
     Room::create([
-        'number' => request('number'),
-        'floor' => request('floor'),
+        'code' => request('code'),
         'price' => request('price')
     ]);
 
@@ -114,7 +124,11 @@ Route::get('/activities/{id}', function ($id) {
 });
 
 Route::post('/activities', function () {
-    // validation
+    request()->validate([
+        'name' => ['required', 'string', 'max:255', 'unique:activities'],
+        'price' => ['required', 'decimal:0,2', 'min:5', 'max:999'],
+        'type' => ['required', Rule::enum(Type::class)]
+    ]);
 
     Activity::create([
         'name' => request('name'),

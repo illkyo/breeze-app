@@ -16,6 +16,11 @@
               <div class="flex items-center rounded-md bg-white pl-3 outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
                 <input id="name" type="text" name="name" class="block min-w-0 grow py-1.5 text-base text-gray-900 focus:outline-none sm:text-sm/6" />
               </div>
+
+              @error('name')
+                <p class="text-xs text-red-500 font-semibold mt-1">{{ $message }}</p>
+              @enderror
+              
             </div>
           </div>
 
@@ -25,6 +30,11 @@
               <div class="flex items-center rounded-md bg-white pl-3 outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
                 <input id="price" type="text" name="price" class="block min-w-0 grow py-1.5 text-base text-gray-900 focus:outline-none sm:text-sm/6" />
               </div>
+
+              @error('price')
+                <p class="text-xs text-red-500 font-semibold mt-1">{{ $message }}</p>
+              @enderror
+
             </div>
           </div>
 
@@ -32,7 +42,7 @@
           <div class="sm:col-span-4">
             <label for="type" class="block text-sm/6 font-medium text-gray-900">Type</label>
             <div class="mt-2">
-               <input type="radio" id="event" name="type" value="event">
+               <input type="radio" id="event" name="type" value="event" checked>
                <label for="event" class="text-sm/6 font-medium text-gray-900">Event</label><br>
                <input type="radio" id="show" name="type" value="show">
                <label for="show" class="text-sm/6 font-medium text-gray-900">Show</label><br>

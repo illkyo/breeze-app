@@ -1,21 +1,27 @@
 <x-layout>
   <x-slot:heading>
-  Create Room
+    Create Room
   </x-slot:heading>
-  <form method="POST" action="/rooms">
+  <form method="POST" action="/rooms" x-data="{ number: '', floor: '' }">
     @csrf
+    <input type="hidden" name="code" x-bind:value="`${number.trim() + floor.trim()}`">
     <div class="space-y-12">
       <div class="border-b border-gray-900/10 pb-12">
         <h2 class="text-base/7 font-semibold text-gray-900">Create New Room</h2>
         <p class="mt-1 text-sm/6 text-gray-600">Please enter details below</p>
-
+        
         <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
           <div class="sm:col-span-4">
             <label for="number" class="block text-sm/6 font-medium text-gray-900">Number</label>
             <div class="mt-2">
               <div class="flex items-center rounded-md bg-white pl-3 outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
-                <input id="number" type="text" name="number" class="block min-w-0 grow py-1.5 text-base text-gray-900 focus:outline-none sm:text-sm/6" />
+                <input id="number" type="text" name="number" x-model="number" class="block min-w-0 grow py-1.5 text-base text-gray-900 focus:outline-none sm:text-sm/6" placeholder="01" required/>
               </div>
+
+              @error('number')
+                <p class="text-xs text-red-500 font-semibold mt-1">{{ $message }}</p>
+              @enderror
+
             </div>
           </div>
 
@@ -23,8 +29,17 @@
             <label for="floor" class="block text-sm/6 font-medium text-gray-900">Floor</label>
             <div class="mt-2">
               <div class="flex items-center rounded-md bg-white pl-3 outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
-                <input id="floor" type="text" name="floor" class="block min-w-0 grow py-1.5 text-base text-gray-900 focus:outline-none sm:text-sm/6" />
+                <input id="floor" type="text" name="floor" x-model="floor" class="block min-w-0 grow py-1.5 text-base text-gray-900 focus:outline-none sm:text-sm/6" placeholder="01" required/>
               </div>
+
+              @error('floor')
+                <p class="text-xs text-red-500 font-semibold mt-1">{{ $message }}</p>
+              @enderror
+
+              @error('code')
+                <p class="text-xs text-red-500 font-semibold mt-1">{{ $message }}</p>
+              @enderror
+
             </div>
           </div>
 
@@ -33,8 +48,13 @@
             <label for="price" class="block text-sm/6 font-medium text-gray-900">Price</label>
             <div class="mt-2">
               <div class="flex items-center rounded-md bg-white pl-3 outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
-                <input id="price" type="text" name="price" class="block min-w-0 grow py-1.5 text-base text-gray-900 focus:outline-none sm:text-sm/6" />
+                <input id="price" type="text" name="price" class="block min-w-0 grow py-1.5 text-base text-gray-900 focus:outline-none sm:text-sm/6" required/>
               </div>
+
+              @error('price')
+                <p class="text-xs text-red-500 font-semibold mt-1">{{ $message }}</p>
+              @enderror
+
             </div>
           </div>
 

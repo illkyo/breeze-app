@@ -6,7 +6,7 @@
     @foreach ($rooms as $room)
       <li>
         <a href="/rooms/{{ $room['id'] }}" class="hover:underline">
-          <strong>Room No. {{ $room['number'].$room['floor'] }}</strong> - {{ $room['price']}} >>
+          <strong>Room {{ $room['code'] }}</strong> - {{ $room['price']}} >>
         </a>
       </li>
     @endforeach

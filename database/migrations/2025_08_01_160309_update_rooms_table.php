@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('ferries', function (Blueprint $table) {
-            $table->integer('capacity');
-            $table->integer('visitors_onboard')->default(0);
+        Schema::table('rooms', function (Blueprint $table) {
+            $table->dropColumn('floor');
+            $table->dropColumn('number');
+            $table->char('code');
         });
     }
 
@@ -22,9 +23,10 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('ferries', function (Blueprint $table) {
-            $table->dropColumn('capacity');
-            $table->dropColumn('visitors_onboard');
+        Schema::table('rooms', function (Blueprint $table) {
+            $table->dropColumn('code');
+            $table->char('number');
+            $table->integer('floor');
         });
     }
 };
