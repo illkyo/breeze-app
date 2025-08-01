@@ -6,8 +6,7 @@
   <p>
     This activity costs {{ $activity['price'] }}.
   </p>
-  <div class="mt-4 flex justify-between">
+  <div class="mt-4">
     <x-button href="/activities/{{ $activity->id }}/edit">Edit Activity</x-button>
-    <x-button href="/activities/create">Create Activity</x-button>
   </div>
 </x-layout>

@@ -6,8 +6,7 @@
   <p>
     This ferry costs {{ $ferry['price'] }} rf for a ride.
   </p>
-  <div class="mt-4 flex justify-between">
+  <div class="mt-4">
     <x-button href="/ferries/{{ $ferry->id }}/edit">Edit Ferry</x-button>
-    <x-button href="/ferries/create">Create Ferry</x-button>
   </div>
 </x-layout>

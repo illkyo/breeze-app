@@ -11,8 +11,7 @@
   <p>
     This room costs {{ $room['price'] }} rf per guest.
   </p>
-  <div class="mt-4 flex justify-between">
+  <div class="mt-4">
     <x-button href="/rooms/{{ $room->id }}/edit">Edit Room</x-button>
-    <x-button href="/rooms/create">Create Room</x-button>
   </div>
 </x-layout>
