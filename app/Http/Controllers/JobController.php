@@ -55,10 +55,9 @@ class JobController extends Controller
         return redirect('/jobs/' . $job->id);
     }
 
-    public function delete(Job $job) {
+    public function destroy(Job $job) {
             // authorize (On Hold...)
         $job->delete();
-
         return redirect('/jobs');
 
     }
