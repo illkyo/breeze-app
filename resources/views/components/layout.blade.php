@@ -36,6 +36,12 @@
               <x-nav-hop href="/login" :active="request()->is('login')">Log In</x-nav-hop>
               <x-nav-hop href="/register" :active="request()->is('register')">Register</x-nav-hop>
             @endguest
+            @auth
+            <form method="POST" action="/logout">
+              @csrf
+              <x-form-button>Log Out</x-form-button>
+            </form>
+            @endauth
           </div>
         <div class="-mr-2 flex md:hidden">
           <!-- Mobile menu button -->
