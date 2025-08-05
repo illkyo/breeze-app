@@ -58,7 +58,7 @@ class ActivityController extends Controller
      */
     public function edit(Activity $activity)
     {
-        //
+        return view('activities.edit', ['activity' => $activity]);
     }
 
     /**
@@ -66,14 +66,27 @@ class ActivityController extends Controller
      */
     public function update(Request $request, Activity $activity)
     {
-        //
+        request()->validate([
+            'name' => ['required', 'string', 'max:255', Rule::unique('activities')->ignore($activity->id)],
+            'price' => ['required', 'decimal:0,2', 'min:5', 'max:999'],
+            'type' => ['required', Rule::enum(Type::class)]
+        ]);
+
+        $activity->update([
+            'name' => request('name'),
+            'price' => request('price'),
+            'type' => request('type')
+        ]);
+
+        return redirect('/activities');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Activity $activity)
+    public function delete(Activity $activity)
     {
-        //
+        $activity->delete();
+        return redirect('/activities');
     }
 }

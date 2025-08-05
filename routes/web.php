@@ -22,7 +22,7 @@ Route::controller(JobController::class)->group(function () {
     Route::post('/jobs', 'store')->middleware('auth');
     Route::get('/jobs/{job}/edit', 'edit')->middleware('auth')->can('edit-job', 'job');
     Route::patch('/jobs/{job}', 'update')->middleware('auth')->can('edit-job', 'job');
-    Route::delete('/jobs/{job}', 'delete')->middleware('auth')->can('destroy-job', 'job');;
+    Route::delete('/jobs/{job}', 'delete')->middleware('auth')->can('destroy-job', 'job');
 });
 
 Route::get('/register', [RegisteredUserController::class, 'create']);

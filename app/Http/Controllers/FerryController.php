@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Ferry;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class FerryController extends Controller
 {
@@ -65,14 +66,28 @@ class FerryController extends Controller
      */
     public function update(Request $request, Ferry $ferry)
     {
-        //
+        request()->validate([
+            'name' => ['required', 'string', 'max:255', Rule::unique('ferries')->ignore($ferry->id)],
+            'price' => ['required', 'decimal:0,2', 'min:5', 'max:999'],
+            'capacity' => ['required', 'integer', 'min:8', 'max:9999']
+        ]);
+
+        $ferry->create([
+            'name' => request('name'),
+            'price' => request('price'),
+            'capacity' => request('capacity'),
+        ]);
+
+
+        return redirect('/ferries');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Ferry $ferry)
+    public function delete(Ferry $ferry)
     {
-        //
+        $ferry->delete();
+        return redirect('/ferries');
     }
 }
