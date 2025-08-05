@@ -5,11 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Job;
 
-
 class JobController extends Controller
 {
     public function index() {
-        $jobs = Job::with('employer')->latest()->simplePaginate(2);
+        $jobs = Job::with('employer')->latest()->simplePaginate(2); 
         return view('jobs.index', ['jobs' => $jobs]);
     }
     
@@ -38,7 +37,6 @@ class JobController extends Controller
 
     public function edit(Job $job) {
         return view('jobs.edit', ['job' => $job]);
-
     }
 
     public function update(Job $job) {
@@ -46,7 +44,6 @@ class JobController extends Controller
             'title' => ['required', 'min:5'],
             'salary' => ['required']
         ]);
-        // authorize (On Hold...)
         $job->update([
             'title' => request('title'),
             'salary' => request('salary')
@@ -56,7 +53,6 @@ class JobController extends Controller
     }
 
     public function destroy(Job $job) {
-            // authorize (On Hold...)
         $job->delete();
         return redirect('/jobs');
 

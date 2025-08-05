@@ -63,10 +63,11 @@
       </div>
 
     <div class="mt-6 flex items-center justify-between gap-x-6">
-
+      @can('destroy-job', $job)
       <div class="flex items-center">
         <button form="delete-form" class="text-red-500 text-sm font-bold">Delete</button>
       </div>
+      @endcan
 
       <div class="flex justify-center items-center gap-x-6">
         <a href="/jobs/{{ $job->id }}" class="text-sm/6 font-semibold text-gray-900">Cancel</a>
