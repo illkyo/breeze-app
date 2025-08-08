@@ -8,6 +8,11 @@ use App\Http\Controllers\SessionController;
 use App\Http\Controllers\FerryController;
 use App\Http\Controllers\RoomController;
 
+Route::get('test', function() {
+    \Illuminate\Support\Facades\Mail::to('John@gmail.com')->send(new \App\Mail\JobPosted());
+    return 'Sent!';
+});
+
 Route::view('/', 'home', [
     'greeting' => 'Yo',
     'name' => 'John'
