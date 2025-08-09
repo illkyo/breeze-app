@@ -7,6 +7,9 @@
     This ferry costs {{ $ferry['price'] }} rf for a ride.
   </p>
   <div class="mt-4">
+    @can('edit-ferry')
     <x-button href="/ferries/{{ $ferry->id }}/edit">Edit Ferry</x-button>
+    @endcan
+    <x-button href="#">Get Ticket</x-button>
   </div>
 </x-layout>

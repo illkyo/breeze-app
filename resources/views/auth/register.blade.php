@@ -42,10 +42,23 @@
           <x-form-field>
             <x-form-label for="password_confirmation">Confirm Password</x-form-label>
             <div class="mt-2">
-              <x-form-input id="password_confirmation" name="password_confirmation" type="password_confirmation" required/>
+              <x-form-input id="password_confirmation" name="password_confirmation" type="password" required/>
               <x-form-error name="password_confirmation"/>
             </div>
           </x-form-field>
+
+
+          <div class="sm:col-span-4">
+            <label for="role-select" class="block text-sm/6 font-medium text-gray-900">Role</label>
+            <select name="role" id="role-select">
+              <option value="visitor">visitor</option>
+              <option value="ferry_admin">ferry_admin</option>
+              <option value="hotel_admin">hotel_admin</option>
+              <option value="park_admin">park_admin</option>
+              <option value="super_admin">super_admin</option>
+            </select>
+          </div>
+
         </div>
 
       </div>

@@ -34,5 +34,42 @@ class AppServiceProvider extends ServiceProvider
         Gate::define('destroy-job', function(User $user, Job $job)  {
             return $job->employer->user->is($user);
         });
+
+        Gate::define('create-ferry', function(User $user)  {
+            return $user->role === Role::FERRY_ADMIN || $user->role === Role::SUPER_ADMIN;
+        });
+
+        Gate::define('edit-ferry', function(User $user)  {
+            return $user->role === Role::FERRY_ADMIN || $user->role === Role::SUPER_ADMIN;
+        });
+
+        Gate::define('delete-ferry', function(User $user)  {
+            return $user->role === Role::FERRY_ADMIN || $user->role === Role::SUPER_ADMIN;
+        });
+
+        Gate::define('create-room', function(User $user)  {
+            return $user->role === Role::HOTEL_ADMIN || $user->role === Role::SUPER_ADMIN;
+        });
+
+        Gate::define('edit-room', function(User $user)  {
+            return $user->role === Role::HOTEL_ADMIN || $user->role === Role::SUPER_ADMIN;
+        });
+
+        Gate::define('delete-room', function(User $user)  {
+            return $user->role === Role::HOTEL_ADMIN || $user->role === Role::SUPER_ADMIN;
+        });
+
+        Gate::define('create-activity', function(User $user)  {
+            return $user->role === Role::PARK_ADMIN || $user->role === Role::SUPER_ADMIN;
+        });
+
+        Gate::define('edit-activity', function(User $user)  {
+            return $user->role === Role::PARK_ADMIN || $user->role === Role::SUPER_ADMIN;
+        });
+
+        Gate::define('delete-activity', function(User $user)  {
+            return $user->role === Role::PARK_ADMIN || $user->role === Role::SUPER_ADMIN;
+        });
+
     }
 }

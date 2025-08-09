@@ -12,6 +12,9 @@
     This room costs {{ $room['price'] }} rf per guest.
   </p>
   <div class="mt-4">
+    @can('edit-room')
     <x-button href="/rooms/{{ $room->id }}/edit">Edit Room</x-button>
+    @endcan
+    <x-button href="#">Book Room</x-button>
   </div>
 </x-layout>

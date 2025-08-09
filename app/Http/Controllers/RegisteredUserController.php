@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Illuminate\Validation\Rule;
+use App\Enums\Role;
 
 class RegisteredUserController extends Controller
 {
@@ -22,11 +24,13 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request)
     {
+        // dd(request()->all());
         $attributes = request()->validate([
             'first_name' => ['required'],
             'last_name' => ['required'],
             'email' => ['required', 'email', 'max:255'],
             'password' => ['required', Password::min(6), 'confirmed'],
+            'role' => ['required', Rule::enum(Role::class)]
         ]);
 
         $user = User::create($attributes);

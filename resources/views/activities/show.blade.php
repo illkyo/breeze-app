@@ -7,6 +7,9 @@
     This activity costs {{ $activity['price'] }}.
   </p>
   <div class="mt-4">
+    @can('edit-activity')
     <x-button href="/activities/{{ $activity->id }}/edit">Edit Activity</x-button>
+    @endcan
+    <x-button href="#">Get Ticket</x-button>
   </div>
 </x-layout>
