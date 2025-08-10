@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->char('name');
             $table->decimal('price');
+            $table->integer('capacity');
+            $table->integer('visitors_onboard')->default(0);
             $table->timestamps();
         });
     }

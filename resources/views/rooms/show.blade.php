@@ -15,6 +15,8 @@
     @can('edit-room')
     <x-button href="/rooms/{{ $room->id }}/edit">Edit Room</x-button>
     @endcan
+    @if (!$room->booked)
     <x-button href="#">Book Room</x-button>
+    @endif
   </div>
 </x-layout>

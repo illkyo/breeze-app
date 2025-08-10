@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Enums\Type;
 use App\Models\Tag;
+use App\Models\ActivityTicket;
 
 class Activity extends Model
 {
@@ -15,6 +16,10 @@ class Activity extends Model
 
     public function tags() {
         return $this->belongsToMany(Tag::class);
+    }
+
+    public function activityTickets() {
+        return $this->hasMany(ActivityTicket::class);
     }
 
     protected function casts(): array

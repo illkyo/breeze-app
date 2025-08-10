@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('rooms', function (Blueprint $table) {
             $table->id();
-            $table->char('number');
-            $table->integer('floor');
+            $table->char('code');
+            $table->boolean('booked')->default(false);
             $table->timestamps();
         });
     }

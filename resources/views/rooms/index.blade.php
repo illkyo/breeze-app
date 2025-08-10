@@ -9,8 +9,11 @@
   @endcan
   <div class="space-y-4">
     @foreach ($rooms as $room)
-      <a href="/rooms/{{ $room['id'] }}" class="block px-4 py-6 border border-gray-300 rounded-lg">
-        <strong>Room {{ $room['code'] }}</strong> - {{ $room['price']}} >>
+      <a href="/rooms/{{ $room['id'] }}" class="block px-4 py-6 border border-gray-300 rounded-lg flex justify-between">
+        <p><strong>Room {{ $room['code'] }}</strong> - {{ $room['price']}} >></p>
+        @if ($room->booked) 
+          <p>booked</p>
+        @endif
       </a>
     @endforeach
   </div>

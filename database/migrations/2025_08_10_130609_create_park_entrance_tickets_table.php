@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('ferries', function (Blueprint $table) {
-            $table->integer('capacity');
-            $table->integer('visitors_onboard')->default(0);
+        Schema::create('park_entrance_tickets', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('visitor_id');
+            $table->decimal('price');
+            $table->timestamps();
         });
     }
 
@@ -22,9 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('ferries', function (Blueprint $table) {
-            $table->dropColumn('capacity');
-            $table->dropColumn('visitors_onboard');
-        });
+        Schema::dropIfExists('park_entrance_tickets');
     }
 };

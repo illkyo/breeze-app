@@ -4,6 +4,9 @@ namespace Database\Seeders;
 
 use App\Models\Employer;
 use App\Models\User;
+use App\Models\Room;
+use App\Models\Activity;
+use App\Models\Ferry;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -14,9 +17,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory(5)->create();
-        Employer::factory(5)->create();
-        $this->call(JobSeeder::class);
+        User::factory(8)->create();
+        Room::factory(10)->create();
+        Ferry::factory(10)->create();
+        Activity::factory(10)->create();
+        // $this->call(JobSeeder::class);
         
     }
 }

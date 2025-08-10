@@ -18,7 +18,7 @@ class FerryFactory extends Factory
     {
         return [
             'name' => fake()->cityPrefix(),
-            'price' => fake()->randomFloat(2, 5, 20),
+            'price' => fake()->randomFloat(2, 10, 80),
             'capacity' => fake()->numberBetween(50, 100),
             'visitors_onboard' => 0
         ];

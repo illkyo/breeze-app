@@ -4,16 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Ferry;
+use App\Models\Room;
 
-class FerryTicket extends Model
+class RoomBooking extends Model
 {
+    /** @use HasFactory<\Database\Factories\RoomBookingFactory> */
     use HasFactory;
-
     protected $fillable = ['visitor_id', 'visitor_count', 'total_price'];
-    
-    public function ferry() {
-        return $this->belongsTo(Ferry::class);
-    }
 
+    public function room() {
+        return $this->belongsTo(Room::class);
+    }
 }

@@ -19,6 +19,7 @@ class RoomFactory extends Factory
         return [
             'code' => str_pad(fake()->numberBetween(0, 9999), 4, '0', STR_PAD_LEFT),
             'price' => fake()->randomFloat(2, 5, 20),
+            'booked' => fake()->randomElement([true, false])
         ];
     }
 }
