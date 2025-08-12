@@ -10,7 +10,8 @@
   <div class="space-y-4">
     @foreach ($ferries as $ferry)
       <a href="/ferries/{{ $ferry['id'] }}" class="block px-4 py-6 border border-gray-300 rounded-lg">
-        <strong>{{ $ferry['name'] }}</strong> - {{ $ferry['price']}} >>
+        {{-- <div class="font-bold text-blue-500 text-sm">{{ $ferry['name'] }}</div> --}}
+        <strong>{{ $ferry['name'] }}</strong> - {{ $ferry['price']}}
       </a>
     @endforeach
   </div>

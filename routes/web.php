@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\SessionController;
@@ -20,10 +21,7 @@ Route::get('test', function() {
     return 'Sent!';
 });
 
-Route::view('/', 'home', [
-    'greeting' => 'Yo',
-    'name' => 'John'
-]);
+Route::get('/', [HomeController::class, 'index']);
 
 Route::view('/contact', 'contact');
 
