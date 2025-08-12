@@ -9,9 +9,13 @@ use App\Models\RoomBooking;
 class Room extends Model
 {
     use HasFactory;
-    protected $fillable = ['code', 'price'];
+    protected $fillable = ['code', 'price', 'booked'];
 
     public function roomBookings() {
         return $this->hasMany(RoomBooking::class);
     }
+
+    protected $casts = [
+        'booked' => 'boolean',
+    ];
 }

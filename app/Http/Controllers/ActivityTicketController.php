@@ -2,64 +2,32 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Activity;
 use App\Models\ActivityTicket;
 use Illuminate\Http\Request;
 
 class ActivityTicketController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function create(Activity $activity)
     {
-        //
+        return view('activity-tickets.create', ['activity' => $activity]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function store(Request $request, Activity $activity)
     {
-        //
+        $attributes = $request->validate([
+            'visitor_count' => ['required', 'integer', 'min:1', 'max:10'],
+            'total_price' => ['required', 'decimal:0,2', 'min:5', 'max:999'],
+        ]);
+        $attributes['activity_id'] = $activity->id;
+        session(['ticket_info' => $attributes]);
+
+        return redirect()->route('activity.payment', ['activity' => $activity]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(ActivityTicket $activityTicket)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(ActivityTicket $activityTicket)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, ActivityTicket $activityTicket)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(ActivityTicket $activityTicket)
-    {
-        //
+        return view('activity-tickets.show', ['activityTicket' => $activityTicket]);
     }
 }

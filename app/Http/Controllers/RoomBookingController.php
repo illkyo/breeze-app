@@ -2,64 +2,32 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Room;
 use App\Models\RoomBooking;
 use Illuminate\Http\Request;
 
 class RoomBookingController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function create(Room $room)
     {
-        //
+        return view('room-bookings.create', ['room' => $room]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function store(Request $request, Room $room)
     {
-        //
+        $attributes = $request->validate([
+            'visitor_count' => ['required', 'integer', 'min:1', 'max:10'],
+            'total_price' => ['required', 'decimal:0,2', 'min:5', 'max:999'],
+        ]);
+        $attributes['room_id'] = $room->id;
+        session(['ticket_info' => $attributes]);
+
+        return redirect()->route('room.payment', ['room' => $room]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(RoomBooking $roomBooking)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(RoomBooking $roomBooking)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, RoomBooking $roomBooking)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(RoomBooking $roomBooking)
-    {
-        //
+        return view('room-bookings.show', ['roomBooking' => $roomBooking]);
     }
 }

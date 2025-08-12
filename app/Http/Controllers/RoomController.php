@@ -39,7 +39,8 @@ class RoomController extends Controller
 
         Room::create([
             'code' => request('code'),
-            'price' => request('price')
+            'price' => request('price'),
+            'booked' => false
         ]);
 
         return redirect('/rooms');

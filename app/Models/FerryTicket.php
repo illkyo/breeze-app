@@ -10,7 +10,7 @@ class FerryTicket extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['visitor_id', 'visitor_count', 'total_price'];
+    protected $fillable = ['ferry_id', 'visitor_id', 'visitor_count', 'total_price'];
     
     public function ferry() {
         return $this->belongsTo(Ferry::class);

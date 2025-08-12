@@ -16,7 +16,7 @@
     <x-button href="/rooms/{{ $room->id }}/edit">Edit Room</x-button>
     @endcan
     @if (!$room->booked)
-    <x-button href="#">Book Room</x-button>
+    <x-button href="/room-bookings/{{ $room->id }}/create">Book Room</x-button>
     @endif
   </div>
 </x-layout>

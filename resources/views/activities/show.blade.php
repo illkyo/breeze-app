@@ -10,6 +10,6 @@
     @can('edit-activity')
     <x-button href="/activities/{{ $activity->id }}/edit">Edit Activity</x-button>
     @endcan
-    <x-button href="#">Get Ticket</x-button>
+    <x-button href="/activity-tickets/{{ $activity->id }}/create">Get Ticket</x-button>
   </div>
 </x-layout>

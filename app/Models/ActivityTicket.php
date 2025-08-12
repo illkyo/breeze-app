@@ -10,7 +10,7 @@ class ActivityTicket extends Model
 {
     /** @use HasFactory<\Database\Factories\ActivityTicketFactory> */
     use HasFactory;
-    protected $fillable = ['visitor_id', 'visitor_count', 'total_price'];
+    protected $fillable = ['activity_id', 'visitor_id', 'visitor_count', 'total_price'];
 
     public function activity() {
         return $this->belongsTo(Activity::class);

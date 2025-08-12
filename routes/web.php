@@ -2,11 +2,18 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JobController;
-use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\SessionController;
+use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\ActivityTicketController;
+use App\Http\Controllers\ActivityTicketPaymentController;
 use App\Http\Controllers\FerryController;
+use App\Http\Controllers\FerryTicketController;
+use App\Http\Controllers\FerryTicketPaymentController;
 use App\Http\Controllers\RoomController;
+use App\Http\Controllers\RoomBookingController;
+use App\Http\Controllers\RoomBookingPaymentController;
+use App\Http\Middleware\TicketInfoExists;
 
 Route::get('test', function() {
     \Illuminate\Support\Facades\Mail::to('John@gmail.com')->send(new \App\Mail\JobPosted());
@@ -37,6 +44,29 @@ Route::get('/login', [SessionController::class, 'create'])->name('login');
 Route::post('/login', [SessionController::class, 'store']);
 Route::post('/logout', [SessionController::class, 'delete']);
 
+Route::controller(ActivityController::class)->group(function () {
+    Route::get('/activities', 'index');
+    Route::get('/activities/create', 'create')->middleware('auth')->can('create-activity');
+    Route::get('/activities/{activity}', 'show');
+    Route::post('/activities', 'store')->middleware('auth')->can('create-activity');
+    Route::get('/activities/{activity}/edit', 'edit')->middleware('auth')->can('edit-activity');
+    Route::patch('/activities/{activity}', 'update')->middleware('auth')->can('edit-activity');
+    Route::delete('/activities/{activity}', 'delete')->middleware('auth')->can('delete-activity');
+});
+
+Route::controller(ActivityTicketController::class)->group(function () {
+    Route::get('/activity-tickets/{activity}/create', 'create')->middleware('auth');
+    Route::post('/activity-tickets/{activity}', 'store')->middleware('auth');
+    Route::get('/activity-tickets/{activityTicket}', 'show')->middleware('auth')->can('view-activity-ticket', 'activityTicket');
+});
+
+Route::controller(ActivityTicketPaymentController::class)->group(function () {
+    Route::get('/activity-tickets/{activity}/payment', 'create')->middleware(['auth', TicketInfoExists::class])->name('activity.payment');
+    Route::post('/activity-tickets/{activity}/payment', 'store')->middleware(['auth', TicketInfoExists::class]);
+    Route::get('/activity-tickets/payment/success/{activityTicket}', 'success')->middleware(['auth', TicketInfoExists::class])->name('activity.payment.success');
+    Route::get('/activity-tickets/{activity}/payment/cancel', 'cancel')->middleware(['auth', TicketInfoExists::class])->name('activity.payment.cancel');
+});
+
 Route::controller(FerryController::class)->group(function () {
     Route::get('/ferries', 'index');
     Route::get('/ferries/create', 'create')->middleware('auth')->can('create-ferry');
@@ -45,6 +75,19 @@ Route::controller(FerryController::class)->group(function () {
     Route::get('/ferries/{ferry}/edit', 'edit')->middleware('auth')->can('edit-ferry');
     Route::patch('/ferries/{ferry}', 'update')->middleware('auth')->can('edit-ferry');
     Route::delete('/ferries/{ferry}', 'delete')->middleware('auth')->can('delete-ferry');
+});
+
+Route::controller(FerryTicketController::class)->group(function () {
+    Route::get('/ferry-tickets/{ferry}/create', 'create')->middleware('auth');
+    Route::post('/ferry-tickets/{ferry}', 'store')->middleware('auth');
+    Route::get('/ferry-tickets/{ferryTicket}', 'show')->middleware('auth')->can('view-ferry-ticket', 'ferryTicket');
+});
+
+Route::controller(FerryTicketPaymentController::class)->group(function () {
+    Route::get('/ferry-tickets/{ferry}/payment', 'create')->middleware(['auth', TicketInfoExists::class])->name('ferry.payment');
+    Route::post('/ferry-tickets/{ferry}/payment', 'store')->middleware(['auth', TicketInfoExists::class]);
+    Route::get('/ferry-tickets/payment/success/{ferryTicket}', 'success')->middleware(['auth', TicketInfoExists::class])->name('ferry.payment.success');
+    Route::get('/ferry-tickets/{ferry}/payment/cancel', 'cancel')->middleware(['auth', TicketInfoExists::class])->name('ferry.payment.cancel');
 });
 
 Route::controller(RoomController::class)->group(function () {
@@ -57,12 +100,15 @@ Route::controller(RoomController::class)->group(function () {
     Route::delete('/rooms/{room}', 'delete')->middleware('auth')->can('delete-room');
 });
 
-Route::controller(ActivityController::class)->group(function () {
-    Route::get('/activities', 'index');
-    Route::get('/activities/create', 'create')->middleware('auth')->can('create-activity');
-    Route::get('/activities/{activity}', 'show');
-    Route::post('/activities', 'store')->middleware('auth')->can('create-activity');
-    Route::get('/activities/{activity}/edit', 'edit')->middleware('auth')->can('edit-activity');
-    Route::patch('/activities/{activity}', 'update')->middleware('auth')->can('edit-activity');
-    Route::delete('/activities/{activity}', 'delete')->middleware('auth')->can('delete-activity');
+Route::controller(RoomBookingController::class)->group(function () {
+    Route::get('/room-bookings/{room}/create', 'create')->middleware('auth')->can('book-room', 'room');
+    Route::post('/room-bookings/{room}', 'store')->middleware('auth')->can('book-room', 'room');
+    Route::get('/room-bookings/{roomBooking}', 'show')->middleware('auth')->can('view-room-booking', 'roomBooking');
+});
+
+Route::controller(RoomBookingPaymentController::class)->group(function () {
+    Route::get('/room-bookings/{room}/payment', 'create')->middleware(['auth', TicketInfoExists::class])->name('room.payment');
+    Route::post('/room-bookings/{room}/payment', 'store')->middleware(['auth', TicketInfoExists::class]);
+    Route::get('/room-bookings/payment/success/{roomBooking}', 'success')->middleware(['auth', TicketInfoExists::class])->name('room.payment.success');
+    Route::get('/room-bookings/{room}/payment/cancel', 'cancel')->middleware(['auth', TicketInfoExists::class])->name('room.payment.cancel');
 });

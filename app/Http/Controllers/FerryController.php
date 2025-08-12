@@ -72,7 +72,7 @@ class FerryController extends Controller
             'capacity' => ['required', 'integer', 'min:8', 'max:9999']
         ]);
 
-        $ferry->create([
+        $ferry->update([
             'name' => request('name'),
             'price' => request('price'),
             'capacity' => request('capacity'),
