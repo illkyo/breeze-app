@@ -29,14 +29,23 @@ class FerryController extends Controller
      */
     public function store(Request $request)
     {
+        // dd(request()->all());
         request()->validate([
             'name' => ['required', 'string', 'max:255', 'unique:ferries'],
             'price' => ['required', 'decimal:0,2', 'min:5', 'max:999'],
+            'from' => ['required', 'in:male_city,grand_hotel,breeze_island', 'different:to'],
+            'departure_time' => ['required', 'date'],
+            'to' => ['required', 'in:male_city,grand_hotel,breeze_island', 'different:from'],
+            'arrival_time' => ['required', 'date'],
         ]);
 
         Ferry::create([
             'name' => request('name'),
             'price' => request('price'),
+            'from' => request('from'),
+            'departure_time' => request('departure_time'),
+            'to' => request('to'),
+            'arrival_time' => request('arrival_time')
         ]);
 
 
@@ -67,11 +76,19 @@ class FerryController extends Controller
         request()->validate([
             'name' => ['required', 'string', 'max:255', Rule::unique('ferries')->ignore($ferry->id)],
             'price' => ['required', 'decimal:0,2', 'min:5', 'max:999'],
+            'from' => ['required', 'in:male_city,grand_hotel,breeze_island', 'different:to'],
+            'departure_time' => ['required', 'date'],
+            'to' => ['required', 'in:male_city,grand_hotel,breeze_island', 'different:from'],
+            'arrival_time' => ['required', 'date'],
         ]);
 
         $ferry->update([
             'name' => request('name'),
             'price' => request('price'),
+            'from' => request('from'),
+            'departure_time' => request('departure_time'),
+            'to' => request('to'),
+            'arrival_time' => request('arrival_time')
         ]);
 
 

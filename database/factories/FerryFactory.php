@@ -16,9 +16,18 @@ class FerryFactory extends Factory
      */
     public function definition(): array
     {
+        $locations = ['male_city', 'grand_hotel', 'breeze_hotel'];
+        $from = fake()->randomElement($locations);
+        $to = fake()->randomElement(array_diff($locations, [$from]));
+        $departure_time = fake()->dateTimeBetween('now', '+2 week');
+        $arrival_time = fake()->dateTimeBetween($departure_time, '+2 week');
         return [
             'name' => fake()->cityPrefix(),
             'price' => fake()->randomFloat(2, 10, 80),
+            'from' => $from,
+            'departure_time' => $departure_time,
+            'to' => $to,
+            'arrival_time' => $arrival_time
         ];
     }
 }

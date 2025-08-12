@@ -15,6 +15,10 @@ return new class extends Migration
             $table->id();
             $table->char('name');
             $table->decimal('price');
+            $table->string('from');
+            $table->dateTime('departure_time');
+            $table->string('to');
+            $table->dateTime('arrival_time');
             $table->timestamps();
         });
     }
