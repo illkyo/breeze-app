@@ -32,13 +32,11 @@ class FerryController extends Controller
         request()->validate([
             'name' => ['required', 'string', 'max:255', 'unique:ferries'],
             'price' => ['required', 'decimal:0,2', 'min:5', 'max:999'],
-            'capacity' => ['required', 'integer', 'min:8', 'max:9999']
         ]);
 
         Ferry::create([
             'name' => request('name'),
             'price' => request('price'),
-            'capacity' => request('capacity'),
         ]);
 
 
@@ -69,13 +67,11 @@ class FerryController extends Controller
         request()->validate([
             'name' => ['required', 'string', 'max:255', Rule::unique('ferries')->ignore($ferry->id)],
             'price' => ['required', 'decimal:0,2', 'min:5', 'max:999'],
-            'capacity' => ['required', 'integer', 'min:8', 'max:9999']
         ]);
 
         $ferry->update([
             'name' => request('name'),
             'price' => request('price'),
-            'capacity' => request('capacity'),
         ]);
 
 

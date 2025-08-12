@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Ferry;
 use App\Models\FerryTicket;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class FerryTicketController extends Controller
 {

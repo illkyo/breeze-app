@@ -38,20 +38,6 @@
             </div>
           </div>
 
-          <div class="sm:col-span-4">
-            <label for="capacity" class="block text-sm/6 font-medium text-gray-900">Capacity</label>
-            <div class="mt-2">
-              <div class="flex items-center rounded-md bg-white pl-3 outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
-                <input id="capacity" type="text" name="capacity" class="block min-w-0 grow py-1.5 text-base text-gray-900 focus:outline-none sm:text-sm/6" />
-              </div>
-
-              @error('capacity')
-                <p class="text-xs text-red-500 font-semibold mt-1">{{ $message }}</p>
-              @enderror
-
-            </div>
-          </div>
-
         </div>
       </div>
 

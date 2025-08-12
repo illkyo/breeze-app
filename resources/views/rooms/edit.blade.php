@@ -41,6 +41,16 @@
             </div>
           </x-form-field>
 
+          <div class="sm:col-span-4">
+            <label for="booked_status" class="block text-sm/6 font-medium text-gray-900">Booked Status</label>
+            <div class="mt-2">
+               <input type="radio" id="true" name="booked_status" value="1" checked>
+               <label for="true" class="text-sm/6 font-medium text-gray-900">True</label><br>
+               <input type="radio" id="false" name="booked_status" value="0">
+               <label for="false" class="text-sm/6 font-medium text-gray-900">False</label><br> 
+            </div>
+          </div>
+
         </div>
       </div>
 

@@ -27,14 +27,6 @@
             </div>
           </x-form-field>
 
-          <x-form-field>
-            <x-form-label for="capacity">Capacity</x-form-label>
-            <div class="mt-2">
-              <x-form-input id="capacity" name="capacity" value="{{ $ferry->capacity }}" required/>
-              <x-form-error name="capacity"/>
-            </div>
-          </x-form-field>
-
         </div>
       </div>
 

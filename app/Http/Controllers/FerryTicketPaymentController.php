@@ -30,6 +30,7 @@ class FerryTicketPaymentController extends Controller
             'visitor_count' => $this->ticketInfo['visitor_count'],
             'total_price' => $this->ticketInfo['total_price']
         ]);
+        
         return redirect()->route('ferry.payment.success', ['ferryTicket' => $ferryTicket]);
     }
 

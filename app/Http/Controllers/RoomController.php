@@ -40,7 +40,6 @@ class RoomController extends Controller
         Room::create([
             'code' => request('code'),
             'price' => request('price'),
-            'booked' => false
         ]);
 
         return redirect('/rooms');
@@ -71,12 +70,14 @@ class RoomController extends Controller
             'number' => ['required', 'numeric', 'digits:2', 'min:0', 'max:99'],
             'floor' => ['required', 'numeric', 'digits:2', 'min:0', 'max:99'],
             'code' => ['required', 'numeric', 'min:0000', 'max:9999', Rule::unique('rooms')->ignore($room->id)],
-            'price' => ['required', 'decimal:0,2', 'min:0', 'max:9999']
+            'price' => ['required', 'decimal:0,2', 'min:0', 'max:9999'],
+            'booked_status' => ['required', 'boolean']
         ]);
 
         $room->update([
             'code' => request('code'),
-            'price' => request('price')
+            'price' => request('price'),
+            'booked' => request('booked_status'),
         ]);
 
         return redirect('/rooms');
