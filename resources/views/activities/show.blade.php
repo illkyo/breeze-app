@@ -4,7 +4,7 @@
   </x-slot:heading>
   <h2 class="font-bold">{{ $activity['name'] }}</h2>
   <p>
-    This activity costs {{ $activity['price'] }}.
+    This activity costs {{ $activity['price'] }} per.
   </p>
   <div class="mt-4">
     @can('edit-activity')

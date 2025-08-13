@@ -10,7 +10,7 @@
   <div class="space-y-4">
     @foreach ($activities as $activity)
       <a href="/activities/{{ $activity['id'] }}" class="block px-4 py-6 border border-gray-300 rounded-lg">
-        <strong>{{ $activity['name'] }}</strong> - {{ $activity['price']}} >>
+        <strong>{{ $activity['name'] }}</strong> - {{ $activity['price']}} rf
       </a>
     @endforeach
   </div>

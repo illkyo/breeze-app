@@ -2,9 +2,9 @@
 <div class="relative flex flex-col my-6 bg-white shadow-sm border border-slate-300 rounded-lg w-72">
   <div class="relative p-2.5 h-44 overflow-hidden rounded-xl bg-clip-border">
     <img
-      src="https://picsum.photos/200/300"
+      src="http://picsum.photos/seed/{{ rand(0, 100000) }}/200/300"
       alt="card-image"
-      class="h-full w-full rounded-md"
+      class="h-full w-full object-cover rounded-md"
     />
   </div>
   <div class="p-4">

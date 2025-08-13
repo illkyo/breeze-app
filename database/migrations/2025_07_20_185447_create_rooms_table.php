@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->char('code');
             $table->boolean('booked')->default(false);
+            $table->decimal('price');
             $table->timestamps();
         });
     }

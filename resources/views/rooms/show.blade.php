@@ -9,7 +9,7 @@
   </x-slot:heading>
   <h2 class="font-bold">Number - {{ $number }} Floor - {{ $floor }}</h2>
   <p>
-    This room costs {{ $room['price'] }} rf per guest.
+    This room costs {{ $room['price'] }} rf per.
   </p>
   <div class="mt-4">
     @can('edit-room')
