@@ -28,6 +28,7 @@ class ActivityTicketController extends Controller
 
     public function show(ActivityTicket $activityTicket)
     {
-        return view('activity-tickets.show', ['activityTicket' => $activityTicket]);
+        $activity = Activity::find($activityTicket['id']);
+        return view('activity-tickets.show', ['activityTicket' => $activityTicket, 'activity' => $activity]);
     }
 }

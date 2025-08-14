@@ -12,7 +12,7 @@
         <p class="text-slate-700 font-bold">{{ $ferry['created_at'] }}</p>
       </div>
     </div>
-    <div class="p-2 flex justify-between border-b-2 border-gray-200">
+    <div class="p-3 flex justify-between border-b-2 border-gray-200">
       <div class="flex gap-2">
         <img src="http://picsum.photos/seed/{{ rand(0, 100000) }}/50" alt="ticket-image">
         <div class="flex flex-col">
@@ -28,14 +28,15 @@
     <div class="p-2 flex justify-between items-center">
       <div class="flex gap-1">
         @for ($i = 0; $i < $ferryTicket['visitor_count']; $i++)
-        <div class="flex flex-col items-center">
+        <div class="flex flex-col items-center text-sm">
           <p class="font-bold">O</p>
-          <p class="font-bold -m-3">^</p>
+          <p class="font-bold -m-2.5">^</p>
           <p class="font-bold -m-2">|</p>
+          <p class="font-bold -m-0.5">^</p>
         </div>
         @endfor
       </div>
-      <h1 class="font-bold text-xl">{{ $ferryTicket['total_price'] }} rf</h1>
+      <h1 class="font-bold text-xl pr-4">{{ $ferryTicket['total_price'] }} rf</h1>
     </div>
   </div>
 </x-layout>

@@ -28,6 +28,7 @@ class RoomBookingController extends Controller
 
     public function show(RoomBooking $roomBooking)
     {
-        return view('room-bookings.show', ['roomBooking' => $roomBooking]);
+        $room = Room::find($roomBooking['id']);
+        return view('room-bookings.show', ['roomBooking' => $roomBooking, 'room' => $room]);
     }
 }
