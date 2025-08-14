@@ -1,6 +1,6 @@
 @php
-  $number = substr($room['code'], 0, 2);
-  $floor = substr($room['code'], -2);
+  $number = substr($roomBooking->room['code'], 0, 2);
+  $floor = substr($roomBooking->room['code'], -2);
 @endphp
 <x-layout>
   <x-slot:heading>
@@ -13,14 +13,14 @@
       </div>
       <div>
         <p class="border-b-2 border-indigo-400 text-center text-slate-700 font-bold text-sm">Booked At</p>
-        <p class="text-slate-700 font-bold">{{ $room['created_at'] }}</p>
+        <p class="text-slate-700 font-bold">{{ $roomBooking['created_at'] }}</p>
       </div>
     </div>
     <div class="p-3 flex justify-between border-b-2 border-gray-200">
       <div class="flex gap-2">
         <img src="http://picsum.photos/seed/{{ rand(0, 100000) }}/50" alt="ticket-image">
         <div class="flex flex-col">
-          <h1 class="font-bold text-xl whitespace-nowrap">Room {{ $room->code }}</h1>
+          <h1 class="font-bold text-xl whitespace-nowrap">Room {{ $roomBooking->room->code }}</h1>
           <p class="text-gray-600">{{ $roomBooking['visitor_id'] }}</p>
         </div>
       </div>

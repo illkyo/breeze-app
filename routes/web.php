@@ -14,9 +14,9 @@ use App\Http\Controllers\FerryTicketPaymentController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\RoomBookingController;
 use App\Http\Controllers\RoomBookingPaymentController;
+use App\Http\Controllers\TicketController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\TicketInfoExists;
-use App\Models\User;
 
 Route::get('test', function() {
     \Illuminate\Support\Facades\Mail::to('John@gmail.com')->send(new \App\Mail\JobPosted());
@@ -44,14 +44,18 @@ Route::get('/login', [SessionController::class, 'create'])->name('login');
 Route::post('/login', [SessionController::class, 'store']);
 Route::post('/logout', [SessionController::class, 'delete']);
 
+Route::controller(TicketController::class)->group(function () {
+    Route::get('/tickets', 'index')->middleware('auth');
+});
+
 Route::controller(UserController::class)->group(function () {
     Route::get('/users', 'index')->middleware('auth')->can('view-users');
     Route::get('/users/create', 'create')->middleware('auth')->can('create-user');
     Route::get('/users/{user}', 'show')->middleware('auth')->can('view-user');
     Route::post('/users', 'store')->middleware('auth')->can('create-user');
-    Route::get('/users/{user}/edit', 'edit')->middleware('auth')->can('edit-user', 'user');
-    Route::patch('/users/{user}', 'update')->middleware('auth')->can('edit-user', 'user');
-    Route::delete('/users/{user}', 'delete')->middleware('auth')->can('delete-user', 'user');
+    Route::get('/users/{user}/edit', 'edit')->middleware('auth')->can('edit-user');
+    Route::patch('/users/{user}', 'update')->middleware('auth')->can('edit-user');
+    Route::delete('/users/{user}', 'delete')->middleware('auth')->can('delete-user');
 });
 
 Route::controller(ActivityController::class)->group(function () {
@@ -65,6 +69,7 @@ Route::controller(ActivityController::class)->group(function () {
 });
 
 Route::controller(ActivityTicketController::class)->group(function () {
+    Route::get('/activity-tickets', 'index')->middleware('auth')->can('view-activity-tickets');
     Route::get('/activity-tickets/{activity}/create', 'create')->middleware('auth');
     Route::post('/activity-tickets/{activity}', 'store')->middleware('auth');
     Route::get('/activity-tickets/{activityTicket}', 'show')->middleware('auth')->can('view-activity-ticket', 'activityTicket');
@@ -88,6 +93,7 @@ Route::controller(FerryController::class)->group(function () {
 });
 
 Route::controller(FerryTicketController::class)->group(function () {
+    Route::get('/ferry-tickets', 'index')->middleware('auth')->can('view-ferry-tickets');
     Route::get('/ferry-tickets/{ferry}/create', 'create')->middleware('auth');
     Route::post('/ferry-tickets/{ferry}', 'store')->middleware('auth');
     Route::get('/ferry-tickets/{ferryTicket}', 'show')->middleware('auth')->can('view-ferry-ticket', 'ferryTicket');
@@ -111,6 +117,7 @@ Route::controller(RoomController::class)->group(function () {
 });
 
 Route::controller(RoomBookingController::class)->group(function () {
+    Route::get('/room-bookings', 'index')->middleware('auth')->can('view-room-bookings');
     Route::get('/room-bookings/{room}/create', 'create')->middleware('auth')->can('book-room', 'room');
     Route::post('/room-bookings/{room}', 'store')->middleware('auth')->can('book-room', 'room');
     Route::get('/room-bookings/{roomBooking}', 'show')->middleware('auth')->can('view-room-booking', 'roomBooking');
@@ -122,3 +129,4 @@ Route::controller(RoomBookingPaymentController::class)->group(function () {
     Route::get('/room-bookings/payment/success/{roomBooking}', 'success')->middleware(['auth', TicketInfoExists::class])->name('room.payment.success');
     Route::get('/room-bookings/{room}/payment/cancel', 'cancel')->middleware(['auth', TicketInfoExists::class])->name('room.payment.cancel');
 });
+

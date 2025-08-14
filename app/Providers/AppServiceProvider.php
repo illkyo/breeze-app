@@ -99,6 +99,18 @@ class AppServiceProvider extends ServiceProvider
             return !$room->booked;
         });
 
+        Gate::define('view-activity-tickets', function(User $user)  {
+            return ActivityTicket::where('visitor_id', $user->id)->exists() || $user->role === Role::PARK_ADMIN || $user->role === Role::SUPER_ADMIN;
+        });
+
+        Gate::define('view-ferry-tickets', function(User $user)  {
+            return FerryTicket::where('visitor_id', $user->id)->exists() || $user->role === Role::FERRY_ADMIN || $user->role === Role::SUPER_ADMIN;
+        });
+
+        Gate::define('view-room-bookings', function(User $user)  {
+            return RoomBooking::where('visitor_id', $user->id)->exists() || $user->role === Role::HOTEL_ADMIN || $user->role === Role::SUPER_ADMIN;
+        });
+
         Gate::define('view-activity-ticket', function(User $user, ActivityTicket $activityTicket)  {
             return $activityTicket['visitor_id'] === $user->id || $user->role === Role::PARK_ADMIN || $user->role === Role::SUPER_ADMIN;
         });

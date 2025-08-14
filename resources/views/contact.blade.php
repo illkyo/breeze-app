@@ -2,5 +2,6 @@
   <x-slot:heading>
   Contact
   </x-slot:heading>
-  <h1>Hello from the Contact page</h1>    
+  <p class="font-bold">Email: <span class="font-medium">BreezeCompany@gmail.com</span></p> 
+  <p class="font-bold" >Phone Number: <span class="font-medium">+330 14141</span></p>    
 </x-layout>

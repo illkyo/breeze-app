@@ -9,7 +9,7 @@
   @endcan
   <div class="space-y-4">
     @foreach ($ferries as $ferry)
-      <a href="/ferries/{{ $ferry['id'] }}" class="block px-4 py-6 border border-gray-300 rounded-lg flex justify-between">
+      <a href="/ferries/{{ $ferry['id'] }}" class="block px-4 py-6 border border-gray-300 rounded-lg flex justify-between bg-white/20">
         <div>
           <p class="font-bold text-zinc-500 text-sm">{{ $ferry['from'] }} <span class="text-indigo-400">>></span> {{ $ferry['to'] }}</p>
           <p><strong>{{ $ferry['name'] }}</strong> - {{ $ferry['price']}} rf</p>

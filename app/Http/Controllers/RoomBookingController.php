@@ -5,9 +5,22 @@ namespace App\Http\Controllers;
 use App\Models\Room;
 use App\Models\RoomBooking;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Enums\Role;
 
 class RoomBookingController extends Controller
 {
+
+    public function index() 
+    {
+        if (Auth::user()->role === Role::VISITOR) {
+            $roomBookings = RoomBooking::where('visitor_id', Auth::id())->with('room')->latest()->get();
+        } else {
+            $roomBookings = RoomBooking::with('room')->latest()->get();
+        }
+        return view('room-bookings.index', ['roomBookings' => $roomBookings]);
+    }
+
     public function create(Room $room)
     {
         return view('room-bookings.create', ['room' => $room]);
@@ -28,7 +41,6 @@ class RoomBookingController extends Controller
 
     public function show(RoomBooking $roomBooking)
     {
-        $room = Room::find($roomBooking['id']);
-        return view('room-bookings.show', ['roomBooking' => $roomBooking, 'room' => $room]);
+        return view('room-bookings.show', ['roomBooking' => $roomBooking]);
     }
 }

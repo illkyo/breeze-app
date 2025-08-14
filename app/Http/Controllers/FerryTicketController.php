@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Ferry;
 use App\Models\FerryTicket;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Enums\Role;
 
 class FerryTicketController extends Controller
 {
@@ -13,7 +15,12 @@ class FerryTicketController extends Controller
      */
     public function index()
     {
-        //
+        if (Auth::user()->role === Role::VISITOR) {
+            $ferryTickets = FerryTicket::where('visitor_id', Auth::id())->with('ferry')->latest()->get();
+        } else {
+            $ferryTickets = FerryTicket::with('ferry')->latest()->get();
+        }
+        return view('ferry-tickets.index', ['ferryTickets' => $ferryTickets]);
     }
 
 
@@ -37,8 +44,7 @@ class FerryTicketController extends Controller
 
     public function show(FerryTicket $ferryTicket)
     {
-        $ferry = Ferry::find($ferryTicket['id']);
-        return view('ferry-tickets.show', ['ferryTicket' => $ferryTicket, 'ferry' => $ferry]);
+        return view('ferry-tickets.show', ['ferryTicket' => $ferryTicket]);
     }
 
 
