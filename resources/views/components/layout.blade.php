@@ -24,6 +24,9 @@
               <x-nav-hop href="/ferries" :active="request()->is('ferries') || request()->is('ferries/*')">Ferries</x-nav-hop>
               <x-nav-hop href="/rooms" :active="request()->is('rooms') || request()->is('rooms/*')">Rooms</x-nav-hop>
               <x-nav-hop href="/activities" :active="request()->is('activities') || request()->is('activities/*')">Activities</x-nav-hop>
+              @can('view-users')
+              <x-nav-hop href="/users" :active="request()->is('users') || request()->is('users/*')">Users</x-nav-hop>
+              @endcan
               <x-nav-hop href="/contact" :active="request()->is('contact')">Contact</x-nav-hop>
               {{-- <x-nav-hop type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" onclick="console.log('Button Clicked')">Button</x-nav-hop> --}}
             </div>

@@ -14,7 +14,9 @@ use App\Http\Controllers\FerryTicketPaymentController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\RoomBookingController;
 use App\Http\Controllers\RoomBookingPaymentController;
+use App\Http\Controllers\UserController;
 use App\Http\Middleware\TicketInfoExists;
+use App\Models\User;
 
 Route::get('test', function() {
     \Illuminate\Support\Facades\Mail::to('John@gmail.com')->send(new \App\Mail\JobPosted());
@@ -41,6 +43,16 @@ Route::post('/register', [RegisteredUserController::class, 'store']);
 Route::get('/login', [SessionController::class, 'create'])->name('login');
 Route::post('/login', [SessionController::class, 'store']);
 Route::post('/logout', [SessionController::class, 'delete']);
+
+Route::controller(UserController::class)->group(function () {
+    Route::get('/users', 'index')->middleware('auth')->can('view-users');
+    Route::get('/users/create', 'create')->middleware('auth')->can('create-user');
+    Route::get('/users/{user}', 'show')->middleware('auth')->can('view-user');
+    Route::post('/users', 'store')->middleware('auth')->can('create-user');
+    Route::get('/users/{user}/edit', 'edit')->middleware('auth')->can('edit-user', 'user');
+    Route::patch('/users/{user}', 'update')->middleware('auth')->can('edit-user', 'user');
+    Route::delete('/users/{user}', 'delete')->middleware('auth')->can('delete-user', 'user');
+});
 
 Route::controller(ActivityController::class)->group(function () {
     Route::get('/activities', 'index');

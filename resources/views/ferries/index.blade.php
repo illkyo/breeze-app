@@ -14,9 +14,9 @@
           <p><strong>{{ $ferry['name'] }}</strong> - {{ $ferry['price']}} rf</p>
           <p>{{ $ferry['from'] }} >> {{ $ferry['to'] }}</p>
         </div>
-        <div>
-          <p>Departure Time: {{ $ferry['departure_time'] }}</p>
-          <p>Arrival Time: {{ $ferry['arrival_time'] }}</p>
+        <div class="space-y-2">
+          <p class="text-sm">Departure Time: {{ $ferry['departure_time'] }}</p>
+          <p class="text-sm">Arrival Time: {{ $ferry['arrival_time'] }}</p>
         </div>
       </a>
     @endforeach

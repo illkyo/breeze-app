@@ -37,7 +37,8 @@ class FerryTicketController extends Controller
 
     public function show(FerryTicket $ferryTicket)
     {
-        return view('ferry-tickets.show', ['ferryTicket' => $ferryTicket]);
+        $ferry = Ferry::find($ferryTicket['id']);
+        return view('ferry-tickets.show', ['ferryTicket' => $ferryTicket, 'ferry' => $ferry]);
     }
 
 

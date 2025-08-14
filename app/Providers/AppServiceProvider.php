@@ -72,7 +72,27 @@ class AppServiceProvider extends ServiceProvider
         });
 
         Gate::define('delete-room', function(User $user)  {
-            return $user->role === Role::HOTEL_ADMIN || $user->role === Role::SUPER_ADMIN;
+            return $user->role === Role::SUPER_ADMIN;
+        });
+
+        Gate::define('view-users', function(User $user)  {
+            return $user->role === Role::SUPER_ADMIN;
+        });
+
+        Gate::define('view-user', function(User $user)  {
+            return $user->role === Role::SUPER_ADMIN;
+        });
+
+        Gate::define('create-user', function(User $user)  {
+            return $user->role === Role::SUPER_ADMIN;
+        });
+
+        Gate::define('edit-user', function(User $user)  {
+            return $user->role === Role::SUPER_ADMIN;
+        });
+
+        Gate::define('delete-user', function(User $user)  {
+            return $user->role === Role::SUPER_ADMIN;
         });
 
         Gate::define('book-room', function(User $user, Room $room)  {

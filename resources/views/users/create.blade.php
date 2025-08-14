@@ -1,8 +1,8 @@
 <x-layout>
   <x-slot:heading>
-  Register
+  Create New User
   </x-slot:heading>
-  <form method="POST" action="/register">
+  <form method="POST" action="/users">
     @csrf
     <div class="space-y-12">
       <div class="border-b border-gray-900/10 pb-12">
@@ -39,21 +39,24 @@
             </div>
           </x-form-field>
 
-          <x-form-field>
-            <x-form-label for="password_confirmation">Confirm Password</x-form-label>
-            <div class="mt-2">
-              <x-form-input id="password_confirmation" name="password_confirmation" type="password" required/>
-              <x-form-error name="password_confirmation"/>
-            </div>
-          </x-form-field>
+          <div class="sm:col-span-4">
+            <label for="role-select" class="block text-sm/6 font-medium text-gray-900">Role</label>
+            <select name="role" id="role-select">
+              <option value="visitor">visitor</option>
+              <option value="ferry_admin">ferry_admin</option>
+              <option value="hotel_admin">hotel_admin</option>
+              <option value="park_admin">park_admin</option>
+              <option value="super_admin">super_admin</option>
+            </select>
+          </div>
 
         </div>
 
       </div>
 
     <div class="mt-6 flex items-center justify-end gap-x-6">
-      <a href="/" class="text-sm/6 font-semibold text-gray-900">Cancel</a>
-      <x-form-button>Register</x-form-button>
+      <a href="/users" class="text-sm/6 font-semibold text-gray-900">Cancel</a>
+      <x-form-button>Register New User</x-form-button>
     </div>
   </form>
 </x-layout>
