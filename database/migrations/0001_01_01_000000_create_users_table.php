@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->char('role')->default(Role::VISITOR);
+            $table->rememberToken();
             $table->timestamps();
         });
 

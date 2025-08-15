@@ -5,6 +5,9 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\SessionController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\PasswordResetLinkController;
+use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\ActivityTicketController;
 use App\Http\Controllers\ActivityTicketPaymentController;
@@ -15,7 +18,6 @@ use App\Http\Controllers\RoomController;
 use App\Http\Controllers\RoomBookingController;
 use App\Http\Controllers\RoomBookingPaymentController;
 use App\Http\Controllers\TicketController;
-use App\Http\Controllers\UserController;
 use App\Http\Middleware\TicketInfoExists;
 
 Route::get('test', function() {
@@ -37,12 +39,17 @@ Route::controller(JobController::class)->group(function () {
     Route::delete('/jobs/{job}', 'delete')->middleware('auth')->can('destroy-job', 'job');
 });
 
-Route::get('/register', [RegisteredUserController::class, 'create']);
-Route::post('/register', [RegisteredUserController::class, 'store']);
-
-Route::get('/login', [SessionController::class, 'create'])->name('login');
-Route::post('/login', [SessionController::class, 'store']);
-Route::post('/logout', [SessionController::class, 'delete']);
+Route::middleware('guest')->group(function () {
+    Route::get('/register', [RegisteredUserController::class, 'create']);
+    Route::post('/register', [RegisteredUserController::class, 'store']);
+    Route::get('/login', [SessionController::class, 'create'])->name('login');
+    Route::post('/login', [SessionController::class, 'store']);
+    Route::get('/forgot-password', [PasswordResetLinkController::class, 'create'])->name('password.request');
+    Route::post('/forgot-password', [PasswordResetLinkController::class, 'store']);
+    Route::get('/reset-password/{token}', [PasswordResetController::class, 'create'])->name('password.reset');
+    Route::post('/reset-password', [PasswordResetController::class, 'store'])->name('password.update');
+});
+Route::post('/logout', [SessionController::class, 'delete'])->middleware('auth');
 
 Route::controller(TicketController::class)->group(function () {
     Route::get('/tickets', 'index')->middleware('auth');
