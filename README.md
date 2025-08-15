@@ -77,7 +77,7 @@ Or Run both server:
 composer run dev
 ```
 
-## Running the Application
+## Running the Database
 
 Run migrations and or seed the database:
 
