@@ -2,7 +2,7 @@
   <x-slot:heading>
   Activity
   </x-slot:heading>
-  <h2 class="font-bold">{{ $activity['name'] }}</h2>
+  <h2 class="font-bold">{{ $activity['name'] }} - <span class="font-medium"> {{ $activity['type'] }}</span></h2>
   <p>
     This activity costs {{ $activity['price'] }} per.
   </p>
