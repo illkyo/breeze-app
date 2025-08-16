@@ -3,7 +3,7 @@
   Activity Ticket
   </x-slot:heading>
   <div class="block h-52 w-1/2 border border-gray-300 rounded-lg flex flex-col p-2 gap-2 bg-white/30">
-    <div class="block bg-indigo-100 rounded-lg flex justify-center w-full h-1/4 px-4 items-center">
+    <div class="block bg-indigo-100 rounded-lg flex justify-between w-full h-1/4 px-4 items-center">
       <div>
         <p class="text-slate-700 font-bold">\\\ {{ $activityTicket->activity->type }} \\\</p>
       </div>
