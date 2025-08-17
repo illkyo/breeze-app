@@ -40,10 +40,13 @@
               <x-nav-hop href="/register" :active="request()->is('register')">Register</x-nav-hop>
             @endguest
             @auth
-            <form method="POST" action="/logout">
-              @csrf
-              <x-form-button>Log Out</x-form-button>
-            </form>
+            <div class="flex items-center gap-4">
+              <form method="POST" action="/logout">
+                @csrf
+                <x-form-button>Log Out</x-form-button>
+              </form>
+              <p class="font-bold text-indigo-500">{{ Auth::user()->role }}</p>
+            </div>
             @endauth
           </div>
         <div class="-mr-2 flex md:hidden">

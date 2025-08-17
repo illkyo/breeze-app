@@ -10,7 +10,7 @@
       <h1 class="font-bold border-b-4 border-indigo-500 rounded-md">Featured Events<h1>
       <div class="flex gap-2">
         @foreach ($activities as $activity)
-          <x-card name="{{ $activity->name }}" price="{{ $activity->price }}" linkName="Get Ticket" href="/activity-tickets/{{ $activity->id }}/create"/>
+          <x-card name="{{ $activity->name }}" price="{{ $activity->price }}" cardLink="/activities/{{ $activity->id }}" linkName="Get Ticket" ticketLink="/activity-tickets/{{ $activity->id }}/create"/>
         @endforeach
       </div>
     </section>
@@ -18,7 +18,7 @@
       <h1 class="font-bold border-b-4 border-indigo-500 rounded-md">AC Ferry Rides<h1>
       <div class="flex gap-2">
         @foreach ($ferries as $ferry)
-          <x-card name="{{ $ferry->name }}" price="{{ $ferry->price }}" linkName="Get Ticket" href="/ferry-tickets/{{ $ferry->id }}/create"/>
+          <x-card name="{{ $ferry->name }}" price="{{ $ferry->price }}" cardLink="/ferries/{{ $ferry->id }}" linkName="Get Ticket" ticketLink="/ferry-tickets/{{ $ferry->id }}/create"/>
         @endforeach
       </div>
     </section>
@@ -26,7 +26,7 @@
       <h1 class="font-bold border-b-4 border-indigo-500 rounded-md">Open Rooms<h1>
       <div class="flex gap-2">
         @foreach ($rooms as $room)
-          <x-card name="Room {{ $room->code }}" price="{{ $room->price }}" linkName="Book Room" href="/room-bookings/{{ $room->id }}/create"/>
+          <x-card name="Room {{ $room->code }}" price="{{ $room->price }}" cardLink="/rooms/{{ $room->id }}" linkName="Book Room" ticketLink="/room-bookings/{{ $room->id }}/create"/>
         @endforeach
       </div>
     </section>
